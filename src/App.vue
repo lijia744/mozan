@@ -1,28 +1,33 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="mozan">
+    <Logo />
+    <router-view></router-view>
+    <Information />
+    <Copyright />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Logo from "./components/Logo";
 
+import Information from "./components/Information";
+import Copyright from "./components/Copyright";
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    HelloWorld
+    Logo,
+    Information,
+    Copyright
   }
-}
+};
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.mozan {
+  width: 100%;
+  height: 100%;
+  background-image: url("./assets/3_02.jpg");
+  background-size: cover;
 }
+
 </style>

@@ -1,0 +1,51 @@
+<template>
+  <div class="wrorder-top">
+    <div class="cart">
+      <span class="left">填写订单</span>
+      <div class="right">
+        <span>购物车</span>
+        <span class="write">填写订单</span>
+        <span>付款，购买成功</span>
+      </div>
+    </div>
+    <img style="display:block" src="../assets/购物车_03.jpg" alt />
+  </div>
+</template>
+
+<script>
+export default {
+  name: "ordertop"
+};
+</script>
+
+<style>
+.wrorder-top {
+  width: 1200px;
+  margin: 0 auto;
+}
+.wrorder-top .cart {
+  background-color: #fdd900;
+  padding: 24px 50px;
+  display: flex;
+  justify-content: space-between;
+}
+.wrorder-top .cart .left {
+  padding: 10px 20px;
+  border-left: 5px solid #000;
+  font-size: 26px;
+}
+.wrorder-top .cart .left .num {
+  font-size: 22px;
+}
+.wrorder-top .cart .left .num .jianshu {
+  color: #f20000;
+}
+.wrorder-top .cart .right span {
+  border-bottom: 2px solid #000;
+  padding-bottom: 10px;
+}
+.wrorder-top .cart .right .write {
+  margin: 20px;
+  border-bottom: 5px solid #000;
+}
+</style>
