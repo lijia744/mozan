@@ -42,7 +42,7 @@
         <img src="../assets/9_09.jpg" alt />
       </div>
       <button>
-        <router-link to="/weixin">付款</router-link>
+        <router-link to="/mozan/weixin">付款</router-link>
       </button>
     </div>
   </div>

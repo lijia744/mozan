@@ -10,27 +10,27 @@ Vue.use(VueRouter);
 const routes = [
   {
     component: FirstPage,
-    path: "/"
+    path: "/mozan"
   },
   {
     component: AddCart,
-    path: "/addcart"
+    path: "/mozan/addcart"
   },
   {
     component: ShoppingCart,
-    path: "/shoppingcart"
+    path: "/mozan/shoppingcart"
   },
   {
     component: WriteOrder,
-    path: "/writeorder"
+    path: "/mozan/writeorder"
   },
   {
     component: ShouYin,
-    path: "/shouyin"
+    path: "/mozan/shouyin"
   },
   {
     component: WeiXin,
-    path: "/weixin"
+    path: "/mozan/weixin"
   }
 ];
 const router = new VueRouter({

@@ -174,7 +174,7 @@
         <span class="total">￥168.00</span>
       </div>
       <button>
-        <router-link to="/shouyin">提交订单</router-link>
+        <router-link to="/mozan/shouyin">提交订单</router-link>
       </button>
     </div>
   </div>

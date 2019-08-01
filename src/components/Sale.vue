@@ -74,7 +74,7 @@
     </div>
     <div class="bot">
       <b>
-        <router-link to="/addcart">立即预购</router-link>
+        <router-link to="/mozan/addcart">立即预购</router-link>
       </b>
     </div>
   </div>
