@@ -42,7 +42,9 @@
             <span class="time">42</span>秒过期后请刷新页面重新获取二维码
           </p>
           <img src="../assets/99_06.jpg" alt />
-          <span class="zhifu">请使用微信扫一扫扫描二维码支付!</span>
+          <span class="zhifu">
+            <router-link to="/success">请使用微信扫一扫扫描二维码支付!</router-link>
+          </span>
         </div>
         <img src="../assets/99_03.jpg" alt />
       </div>

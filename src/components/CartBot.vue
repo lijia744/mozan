@@ -3,10 +3,8 @@
     <div class="jisuan">
       <div class="left">
         <span class="choose">
-          <input type="checkbox" class="checkbox" id="all" />
-          <label class="text" for="all">
-            <span>√</span>
-          </label>全选
+          <span class="none" v-if="zhanshi"></span>
+          <span class="duigou" v-else>√</span>
         </span>
         <img class="delete" src="../assets/2 (2).jpg" alt />
         <span @click="show=true">删除</span>
@@ -22,7 +20,7 @@
         <span class="goodsnum">
           共
           <span class="num">{{this.$store.state.carts.length}}</span>件商品，已选择
-          <span class="num"></span>件
+          <span class="num">1</span>件
         </span>
       </div>
       <div class="right">
@@ -31,7 +29,7 @@
           <br />
           <span>[不含运费]</span>
         </div>
-        <span class="price">￥</span>
+        <span class="price">￥79.00</span>
       </div>
     </div>
     <button @click="$emit('maskTan')">去结算</button>
@@ -44,7 +42,8 @@ export default {
   props: ["carts"],
   data() {
     return {
-      show: false
+      show: false,
+      zhanshi: true
     };
   },
   methods: {

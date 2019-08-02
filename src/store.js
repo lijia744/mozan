@@ -3,6 +3,7 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
+    checked: true,
     carts: [
       {
         id: 1,
@@ -13,7 +14,9 @@ const store = new Vuex.Store({
         title: "龙之谷六周年限定礼包大Boss冰龙款男士T恤",
         style: "iphone 5",
         size: "XXL",
-        show: false
+        show: false,
+        checked: true,
+        chuxian: false
       },
       {
         id: 2,
@@ -24,7 +27,9 @@ const store = new Vuex.Store({
         title: "龙之谷六周年限定礼包大Boss冰龙款男士T恤",
         style: null,
         size: null,
-        show: false
+        show: false,
+        checked: true,
+        chuxian: false
       },
       {
         id: 3,
@@ -35,7 +40,9 @@ const store = new Vuex.Store({
         title: "龙之谷六周年限定礼包大Boss冰龙款男士T恤",
         style: "iphone 5",
         size: "XL",
-        show: false
+        show: false,
+        checked: true,
+        chuxian: false
       },
       {
         id: 4,
@@ -46,7 +53,9 @@ const store = new Vuex.Store({
         title: "龙之谷六周年限定礼包大Boss冰龙款男士T恤",
         style: "iphone 5",
         size: "XXL",
-        show: false
+        show: false,
+        checked: true,
+        chuxian: false
       }
     ]
   },

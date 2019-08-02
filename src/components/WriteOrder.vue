@@ -4,12 +4,12 @@
     <div class="address">
       <div class="title">
         <b>收货地址</b>
-        <b>
+        <b @click="addressShow=true">
           <span class="jiahao">+</span>新增地址
         </b>
       </div>
       <ul>
-        <li>
+        <li :class="add=='one'?'active':''" @click="add='one'">
           <div class="left">
             <div>
               <img src="../assets/6 (1).jpg" alt />
@@ -36,7 +36,7 @@
             </div>
           </div>
         </li>
-        <li>
+        <li :class="add=='two'?'active':''" @click="add='two'">
           <div class="left">
             <div>
               <img src="../assets/6 (1).jpg" alt />
@@ -63,7 +63,7 @@
             </div>
           </div>
         </li>
-        <li>
+        <li :class="add=='three'?'active':''" @click="add='three'">
           <div class="left">
             <div>
               <img src="../assets/6 (1).jpg" alt />
@@ -174,8 +174,92 @@
         <span class="total">￥168.00</span>
       </div>
       <button>
-        <router-link to="/mozan/shouyin">提交订单</router-link>
+        <router-link to="/shouyin">提交订单</router-link>
       </button>
+    </div>
+    <div v-show="addressShow" class="new-address">
+      <div class="address-box">
+        <h1>
+          <span>新增地址</span>
+          <span @click="addressShow=false">×</span>
+        </h1>
+        <div class="address-info">
+          <div>
+            <span>
+              <span class="form-txt">
+                <span>*收货人</span>
+                <!-- <span>请填写收货人！</span> -->
+              </span>
+              <input class="people" type="text" v-model=" user_name" />
+            </span>
+            <span>
+              <span class="form-txt">
+                <span>*联系电话</span>
+                <!-- <span>填写的手机号格式错误</span> -->
+              </span>
+              <input class="phone-txt" type="text" v-model=" user_phoneNum" />
+            </span>
+          </div>
+          <div>
+            <span>*所在地区</span>
+            <span>请填写完整的所在地区</span>
+          </div>
+          <div class="linkage">
+            <el-select v-model="sheng" @change="choseProvince" placeholder="省级地区">
+              <el-option
+                v-for="item in province"
+                :key="item.id"
+                :label="item.value"
+                :value="item.id"
+              ></el-option>
+            </el-select>
+            <el-select v-model="shi" @change="choseCity" placeholder="市级地区">
+              <el-option v-for="item in shi1" :key="item.id" :label="item.value" :value="item.id"></el-option>
+            </el-select>
+            <el-select v-model="qu" @change="choseBlock" placeholder="区级地区">
+              <el-option v-for="item in qu1" :key="item.id" :label="item.value" :value="item.id"></el-option>
+            </el-select>
+          </div>
+
+          <div class="width-100">
+            <span>
+              <span class="form-txt">
+                <span>*收货人</span>
+                <!-- <span>请填写收货人！</span> -->
+              </span>
+              <input type="text" />
+            </span>
+          </div>
+          <div>
+            <span>
+              <span class="form-txt">
+                <span>地址别名</span>
+              </span>
+              <input class="address" type="text" />
+            </span>
+            <span class="other-name">
+              <span class="form-txt">
+                <span>常用别名</span>
+              </span>
+              <span class="df">
+                <span class="btn">家</span>
+                <span class="btn">公司</span>
+                <span class="btn">父母家</span>
+              </span>
+            </span>
+          </div>
+        </div>
+        <div class="save-address">
+          <div @click.stop="change">
+            <span class="df">
+              <span v-if="!defaultChecked" class="checkbox"></span>
+              <span v-else class="check">√</span>
+            </span>
+            <span>设为默认地址</span>
+          </div>
+          <span @click="addAddress" class="save">保存地址</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -184,13 +268,88 @@
 import OrderTop from "../components/OrderTop";
 export default {
   name: "writeorder",
+  data() {
+    return {
+      defaultChecked: false,
+      addressShow: false,
+      province: "",
+      sheng: "",
+      shi: "",
+      shi1: [],
+      qu: "",
+      qu1: [],
+      city: "",
+      block: "",
+      user_name: "",
+      user_phoneNum: "",
+      add: ""
+    };
+  },
   components: {
     OrderTop
+  },
+  methods: {
+    choseProvince: function(e) {
+      for (var index2 in this.province) {
+        if (e === this.province[index2].id) {
+          console.log(this.province[index2].id); //你选择的省级编码
+          console.log(this.province[index2].value); //省级编码 对应的汉字
+          this.shi1 = this.province[index2].children;
+          this.shi = this.province[index2].children[0].value;
+          this.qu1 = this.province[index2].children[0].children;
+          this.qu = this.province[index2].children[0].children[0].value;
+          this.E = this.qu1[0].id;
+        }
+      }
+    },
+    // 选市
+    choseCity: function(e) {
+      for (var index3 in this.city) {
+        if (e === this.city[index3].id) {
+          this.qu1 = this.city[index3].children;
+          this.qu = this.city[index3].children[0].value;
+          this.E = this.qu1[0].id;
+          // console.log(this.E)
+        }
+      }
+    },
+    // 选区
+    choseBlock: function(e) {
+      this.E = e;
+      // console.log(this.E)
+    },
+    addAddress() {
+      if (this.user_name && this.user_phoneNum) {
+        this.$store.state.users.push({
+          user_name: this.user_name,
+          user_address: "秦皇岛市海港区秦海璐84号",
+          user_phoneNum: this.user_phoneNum,
+          active_address: this.defaultChecked,
+          user_id: 899999,
+          byid: [1],
+          bynum: {
+            1: 1
+          }
+        });
+        this.addressShow = false;
+      } else {
+        alert("请输入正确的信息");
+      }
+    },
+    change() {
+      console.log(11);
+      this.$store.commit("changeAddress", this.defaultChecked);
+      this.defaultChecked = !this.defaultChecked;
+    }
   }
 };
 </script>
 
 <style>
+.order .el-input__icon {
+  line-height: 0;
+}
+
 .order {
   background-image: url("../assets/cart2_02.jpg");
 }
@@ -227,6 +386,104 @@ export default {
   text-align: center;
   margin-right: 10px;
 }
+.new-address {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+.new-address .address-box {
+  background-color: #fff;
+  width: 690px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 20px;
+}
+.new-address .address-box h1 {
+  margin: 0;
+  font-size: 18px;
+  border-bottom: 3px solid #000;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.new-address .address-box > .address-info > div {
+  display: flex;
+  font-size: 12px;
+  justify-content: space-between;
+  padding-top: 20px;
+}
+.new-address .address-box > .address-info > div > span {
+  display: flex;
+  flex-direction: column;
+}
+.new-address .address-box > .address-info > div > span .form-txt {
+  display: flex;
+  justify-content: space-between;
+}
+.new-address .address-box input {
+  outline: none;
+  height: 26px;
+}
+.new-address .address-box > .address-info > div > span > input.people {
+  width: 210px;
+}
+.new-address .address-box > .address-info > div > span > input.phone-txt {
+  width: 432px;
+}
+.new-address .address-box > .address-info > div > .other-name {
+  width: 210px;
+  display: flex;
+  /* justify-content: space-between; */
+}
+.new-address .address-box > .address-info > div > .other-name > span {
+  display: flex;
+  justify-content: space-between;
+}
+.new-address
+  .address-box
+  > .address-info
+  > div
+  > .other-name
+  > span
+  > span.btn {
+  width: 68px;
+  height: 26px;
+  line-height: 26px;
+  text-align: center;
+  border: 1px solid #babec9;
+}
+.new-address .address-box > .address-info > div > span > input.address {
+  width: 430px;
+}
+
+.new-address .address-box > .address-info > div.width-100,
+.new-address .address-box > .address-info > div.width-100 > span {
+  width: 100%;
+}
+
+.new-address .address-box > .save-address {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 28px;
+  align-items: center;
+}
+.new-address .address-box > .save-address > div {
+  font-size: 12px;
+  display: flex;
+}
+.new-address .address-box > .save-address > .save {
+  width: 210px;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  font-size: 18px;
+  background-color: #fdd900;
+}
+
 .order .address ul li {
   padding: 20px 24px;
   justify-content: space-between;
@@ -411,5 +668,8 @@ export default {
 .order .money a {
   color: #000;
   outline: none;
+}
+.order .address ul li.active {
+  border: 3px solid #fdd900;
 }
 </style>

@@ -6,35 +6,40 @@ import ShoppingCart from "./components/ShoppingCart.vue";
 import WriteOrder from "./components/WriteOrder.vue";
 import ShouYin from "./components/ShouYin.vue";
 import WeiXin from "./components/WeiXin.vue";
+import Success from "./components/Success.vue";
 Vue.use(VueRouter);
 const routes = [
   {
     component: FirstPage,
-    path: "/mozan"
+    path: "/"
   },
   {
     component: AddCart,
-    path: "/mozan/addcart"
+    path: "/addcart"
   },
   {
     component: ShoppingCart,
-    path: "/mozan/shoppingcart"
+    path: "/shoppingcart"
   },
   {
     component: WriteOrder,
-    path: "/mozan/writeorder"
+    path: "/writeorder"
   },
   {
     component: ShouYin,
-    path: "/mozan/shouyin"
+    path: "/shouyin"
   },
   {
     component: WeiXin,
-    path: "/mozan/weixin"
+    path: "/weixin"
+  },
+  {
+    component: Success,
+    path: "/success"
   }
 ];
 const router = new VueRouter({
   routes,
-  mode: "history"
+  mode: "hash"
 });
 export default router;

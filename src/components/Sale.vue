@@ -28,7 +28,7 @@
           <img src="../assets/1_08.jpg" alt />
           <div class="text">
             <span class="yel">注：</span>
-            <span>商品将于5</span>
+            <span>商品将于</span>
             <span class="yel">2019/12/25</span>
             <span>统一发货</span>
           </div>
@@ -45,36 +45,40 @@
         <div class="box">
           <span class="title">款式</span>
           <div class="kuanshi">
-            <span>iPhone 5</span>
-            <span class="six">iPhone 6</span>
-            <span>iPhone 6+</span>
+            <span :class="kuanshi=='iPhone5'?'active':''" @click="kuanshi='iPhone5'">iPhone 5</span>
+            <span :class="kuanshi=='iPhone6'?'active six':'six'" @click="kuanshi='iPhone6'">iPhone 6</span>
+            <span :class="kuanshi=='iPhone66'?'active':''" @click="kuanshi='iPhone66'">iPhone 6+</span>
           </div>
         </div>
         <div class="box">
           <span class="title">尺码</span>
           <div class="chima">
-            <span>XXS</span>
-            <span>XS</span>
-            <span>S</span>
-            <span>M</span>
-            <span>L</span>
-            <span>XL</span>
-            <span>XXL</span>
+            <div>
+              <span :class="chima=='XXS'?'active':''" @click="chima='XXS'">XXS</span>
+              <span :class="chima=='XS'?'active':''" @click="chima='XS'">XS</span>
+              <span :class="chima=='S'?'active':''" @click="chima='S'">S</span>
+              <span :class="chima=='M'?'active':''" @click="chima='M'">M</span>
+            </div>
+            <div>
+              <span :class="chima=='L'?'active':''" @click="chima='L'">L</span>
+              <span :class="chima=='XL'?'active':''" @click="chima='XL'">XL</span>
+              <span :class="chima=='XXL'?'active':''" @click="chima='XXL'">XXL</span>
+            </div>
           </div>
         </div>
         <div class="box">
           <span class="title">数量</span>
           <div class="num">
-            <span>-</span>
-            <span class="one">1</span>
-            <span>+</span>
+            <span @click="subClick">-</span>
+            <span class="one">{{number}}</span>
+            <span @click="number++">+</span>
           </div>
         </div>
       </div>
     </div>
     <div class="bot">
       <b>
-        <router-link to="/mozan/addcart">立即预购</router-link>
+        <router-link to="/addcart">立即预购</router-link>
       </b>
     </div>
   </div>
@@ -84,6 +88,13 @@
 import moment from "moment";
 export default {
   name: "sale",
+  data() {
+    return {
+      kuanshi: null,
+      chima: null,
+      number: 1
+    };
+  },
   mounted() {
     (function() {
       var Ticts = function Ticts() {
@@ -136,6 +147,13 @@ export default {
       window.Ticts = new Ticts();
     })();
     Ticts.createTicts("time1", "2019-12-25 00:00:00");
+  },
+  methods: {
+    subClick() {
+      if (this.number > 1) {
+        this.number--;
+      }
+    }
   }
 };
 </script>
@@ -221,7 +239,7 @@ export default {
   padding-left: 50px;
 }
 .sale .top .right .box {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   display: flex;
 }
 .sale .top .right .box span {
@@ -230,6 +248,7 @@ export default {
 .sale .top .right > div .title {
   display: block;
   width: 65px;
+  height: 26px;
   line-height: 26px;
   background-color: #fff;
   font-size: 14px;
@@ -245,9 +264,17 @@ export default {
   color: #fddb00;
   font-size: 26px;
 }
-.sale .top .right .box .kuanshi,
-.sale .top .right .box .chima {
+.sale .top .right .box .kuanshi {
   display: flex;
+}
+.sale .top .right .box .chima {
+  width: 272px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.sale .top .right .box .chima > div {
+  display: flex;
+  margin-bottom: 5px;
 }
 .sale .top .right .box .kuanshi span,
 .sale .top .right .box .chima span {
@@ -259,7 +286,8 @@ export default {
   padding: 3px;
 }
 .sale .top .right .box .chima span {
-  margin-left: 10px;
+  width: 64px;
+  margin-right: 5px;
 }
 .sale .top .right .box .kuanshi .six {
   margin: 0 10px;
@@ -271,7 +299,7 @@ export default {
 .sale .top .right .box .num span {
   display: block;
   width: 70px;
-  line-height: 36px;
+  line-height: 26px;
   text-align: center;
   color: #fff;
   border: 1px solid #fff;
@@ -298,5 +326,14 @@ export default {
 }
 .sale .bot b a {
   color: #fddb00;
+}
+.sale .top .right .box .kuanshi span.active,
+.sale .top .right .box .chima span.active {
+  color: #fddb00;
+  border: 1px solid #fddb00;
+}
+.sale .top .right .box .num span:active {
+  color: #fddb00;
+  border: 1px solid #fddb00;
 }
 </style>

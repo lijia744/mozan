@@ -16,10 +16,10 @@
           </div>
           <div class="btn">
             <button class="return">
-              <router-link to="/mozan">返回</router-link>
+              <router-link to="/">返回</router-link>
             </button>
             <button>
-              <router-link to="/mozan/shoppingcart">去购物车结算</router-link>
+              <router-link to="/shoppingcart">去购物车结算</router-link>
             </button>
           </div>
         </div>

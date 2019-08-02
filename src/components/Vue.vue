@@ -19,7 +19,7 @@
           <li v-for="cart in carts" :key="cart.id">
             <div class="left">
               <span class="choose">
-                <span class="none" v-if="zhanshi"></span>
+                <span class="none" v-if="chuxian=true"></span>
                 <span class="duigou" v-else>√</span>
               </span>
               <img :src="cart.src" alt />
@@ -266,6 +266,9 @@ export default {
   height: 20px;
   border: 2px solid #b8beca;
 }
+.shoppingcart .list .choose .all {
+  margin-left: 10px;
+}
 .shoppingcart .list .choose .duigou {
   width: 20px;
   text-align: center;
@@ -290,9 +293,6 @@ export default {
   display: flex;
   width: 50%;
   align-items: center;
-}
-.shoppingcart .list .all {
-  margin-left: 10px;
 }
 .shoppingcart .list .main li img {
   width: 96px;
