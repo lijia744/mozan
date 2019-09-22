@@ -1,15 +1,17 @@
 import Vue from "vue";
 import App from "./App.vue";
-import "./assets/global.css";
-import store from "./store";
+import "./assets/glocal.css";
+import PUBLICURL from "./link";
+import "./assets/iconfont/iconfont.css";
 import router from "./router";
-import ElementUi from "element-ui";
-import "element-ui/lib/theme-chalk/index.css";
+import store from "./store/index";
+import SIdentify from "./components/Verification.vue";
+Vue.use(SIdentify);
+Vue.prototype.$publicUrl = PUBLICURL;
 Vue.config.productionTip = false;
-Vue.use(ElementUi);
 
 new Vue({
   render: h => h(App),
-  store,
-  router
+  router,
+  store
 }).$mount("#app");

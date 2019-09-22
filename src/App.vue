@@ -1,33 +1,36 @@
 <template>
-  <div class="mozan">
-    <Logo />
-    <router-view></router-view>
-    <Information />
-    <Copyright />
+  <div class="app">
+    <Header />
+    <div class="scetion">
+      <router-view></router-view>
+    </div>
+    <Footer />
   </div>
 </template>
-
+ 
 <script>
-import Logo from "./components/Logo";
-
-import Information from "./components/Information";
-import Copyright from "./components/Copyright";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 export default {
   name: "app",
   components: {
-    Logo,
-    Information,
-    Copyright
+    Header,
+    Footer
+  },
+  mounted() {
+    this.$router.afterEach((to, from, next) => {
+      window.scrollTo(0, 0);
+    });
   }
 };
 </script>
 
 <style>
-.mozan {
-  width: 100%;
-  height: 100%;
-  background-image: url("./assets/3_02.jpg");
-  background-size: cover;
+.app {
+  user-select: none;
+  position: relative;
 }
-
+.app > .scetion {
+  background-image: url("./assets/images/bg.jpg");
+}
 </style>
